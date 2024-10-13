@@ -2,9 +2,11 @@ import ButtonElement from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
 import Center from "@/components/Center";
 import Header from "@/components/Header";
+import Input from "@/components/Input";
 import Table from "@/components/Table";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const ColumnsWrapper = styled.div`
@@ -48,6 +50,14 @@ const QuantityLabel = styled.label`
 const CartPage = () => {
   const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
   const [products, setProducts] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [country, setCountry] = useState("");
+  const router = useRouter();
+  const [orderSuccess, setOrderSuccess] = useState(false);
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -58,8 +68,16 @@ const CartPage = () => {
         .then((response) => {
           setProducts(response.data);
         });
+    } else {
+      setProducts([]);
     }
   }, [cartProducts]);
+
+  useEffect(() => {
+    if (router.query.success) {
+      setOrderSuccess(true);
+    }
+  }, [router.query]);
 
   const moreOfThisProduct = (productId) => {
     addProduct(productId);
@@ -74,6 +92,41 @@ const CartPage = () => {
   for (const productId of cartProducts) {
     const price = products.find((p) => p._id === productId)?.price || 0;
     total += price;
+  }
+
+  const goToPayment = async () => {
+    const res = await axios.post("/api/checkout", {
+      name,
+      email,
+      city,
+      postalCode,
+      streetAddress,
+      country,
+      cartProducts,
+    });
+
+    if (res.data.url) {
+      window.location = res.data.url;
+    }
+  };
+
+  if (orderSuccess) {
+    return (
+      <>
+        <Header />
+        <Center>
+          <ColumnsWrapper>
+            <Box>
+              <h1>Thank you for your order!</h1>
+              <p>
+                We've just sent the order information to the provided email
+                address.
+              </p>
+            </Box>
+          </ColumnsWrapper>
+        </Center>
+      </>
+    );
   }
 
   return (
@@ -140,8 +193,52 @@ const CartPage = () => {
           {!!cartProducts.length && (
             <Box>
               <h2>Checkout</h2>
-              <input type="text" placeholder="Address" />
-              <ButtonElement black block size={"l"}>
+              <Input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <Input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              <div style={{ display: "flex", gap: "5px" }}>
+                <Input
+                  type="text"
+                  placeholder="City"
+                  name="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+                <Input
+                  type="text"
+                  placeholder="Postal-Code"
+                  name="postalCode"
+                  value={postalCode}
+                  onChange={(e) => setPostalCode(e.target.value)}
+                />
+              </div>
+              <Input
+                type="text"
+                placeholder="Street Address"
+                name="streetAddress"
+                value={streetAddress}
+                onChange={(e) => setStreetAddress(e.target.value)}
+              />
+              <Input
+                type="text"
+                placeholder="Country"
+                name="country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+              <ButtonElement black block size={"l"} onClick={goToPayment}>
                 Continue to payment
               </ButtonElement>
             </Box>
