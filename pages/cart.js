@@ -48,7 +48,8 @@ const QuantityLabel = styled.label`
 `;
 
 const CartPage = () => {
-  const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
+  const { cartProducts, addProduct, removeProduct, clearCart } =
+    useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -76,6 +77,7 @@ const CartPage = () => {
   useEffect(() => {
     if (router.query.success) {
       setOrderSuccess(true);
+      clearCart();
     }
   }, [router.query]);
 
