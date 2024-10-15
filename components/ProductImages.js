@@ -40,7 +40,7 @@ const ProductImages = ({ images }) => {
 
   return (
     <ImageWrapper>
-      <MainImage src={activeImage} />
+      <MainImage src={activeImage} alt="test" />
       <ImageChanger>
         {images.map((img) => (
           <ImageButton
@@ -48,7 +48,7 @@ const ProductImages = ({ images }) => {
             onClick={() => setActiveImage(img)}
             active={img === activeImage}
           >
-            <Image src={img} />
+            <Image src={img} alt="test" />
           </ImageButton>
         ))}
       </ImageChanger>

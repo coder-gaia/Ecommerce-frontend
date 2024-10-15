@@ -70,7 +70,7 @@ const ProductCard = ({ _id, title, description, price, images }) => {
     <CardWrapper>
       <WhiteCard href={url}>
         <div>
-          <img src={images[0]} />
+          <img src={images[0]} alt="test" />
         </div>
       </WhiteCard>
       <ProductInfo>

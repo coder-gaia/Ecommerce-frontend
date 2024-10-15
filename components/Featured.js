@@ -44,7 +44,10 @@ const Featured = ({ featuredProduct }) => {
             </div>
           </Columns>
           <Columns>
-            <img src="https://dawid-next-ecommerce.s3.amazonaws.com/1679151719649.png" />
+            <img
+              src="https://dawid-next-ecommerce.s3.amazonaws.com/1679151719649.png"
+              alt="test"
+            />
           </Columns>
         </ColumnsWrapper>
       </Center>

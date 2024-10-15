@@ -173,7 +173,7 @@ const CartPage = () => {
                     <tr key={product._id}>
                       <ProductInfoCell>
                         <ProductImgCard>
-                          <img src={product.images[0]} />
+                          <img src={product.images[0]} alt="test" />
                         </ProductImgCard>
                         {product.title}
                       </ProductInfoCell>
