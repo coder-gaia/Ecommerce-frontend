@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
-const MainImage = styled.img`
+const MainImage = styled.image`
   max-width: 100%;
   max-height: 200px;
 `;
 
-const Image = styled.img`
+const Image = styled.image`
   max-width: 100%;
   max-height: 100%;
 `;
