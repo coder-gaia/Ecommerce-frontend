@@ -32,7 +32,7 @@ const Featured = ({ featuredProduct }) => {
                 <ButtonLink
                   white={1}
                   outline={1}
-                  href={"products/" + featuredProduct._id}
+                  href={"/product/" + featuredProduct._id}
                 >
                   Read More
                 </ButtonLink>

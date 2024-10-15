@@ -35,6 +35,7 @@ export function CarContextProvider({ children }) {
 
   const clearCart = () => {
     setCartProducts([]);
+    ls.removeItem("cart");
   };
 
   return (

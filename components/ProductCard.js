@@ -28,15 +28,29 @@ const ProductInfo = styled.div`
 `;
 
 const PriceRow = styled.div`
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2px;
+  margin-top: 5px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+  }
 `;
 
 const Price = styled.div`
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
+  text-align: left;
+  margin-bottom: 5px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+  }
 `;
 
 const ProductTitle = styled(Link)`
@@ -63,7 +77,12 @@ const ProductCard = ({ _id, title, description, price, images }) => {
         <ProductTitle href={url}>{title}</ProductTitle>
         <PriceRow>
           <Price>${price}</Price>
-          <ButtonElement primary outline onClick={() => addProduct(_id)}>
+          <ButtonElement
+            primary={1}
+            outline={1}
+            block
+            onClick={() => addProduct(_id)}
+          >
             <Cart />
             <b>Add to cart</b>
           </ButtonElement>

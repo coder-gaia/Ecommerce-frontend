@@ -9,7 +9,11 @@ export const Background = styled.div`
 export const Title = styled.h1`
   margin: 0;
   font-weight: normal;
-  font-size: 3rem;
+  font-size: 1.5rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 export const Description = styled.p`
@@ -19,11 +23,30 @@ export const Description = styled.p`
 
 export const ColumnsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 20px;
 
   img {
     max-width: 100%;
+    max-height: 200px;
+  }
+
+  div:nth-child(1) {
+    order: 1;
+    display: block;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.1fr 0.9fr;
+
+    img {
+      max-width: 100%;
+    }
+
+    div:nth-child(1) {
+      order: 0;
+    }
   }
 `;
 
