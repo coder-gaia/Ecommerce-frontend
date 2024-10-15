@@ -5,8 +5,6 @@ import Link from "next/link";
 import { CartContext } from "./CartContext";
 import { useContext } from "react";
 
-const CardWrapper = styled.div``;
-
 const WhiteCard = styled(Link)`
   background-color: #fff;
   padding: 20px;
@@ -67,7 +65,7 @@ const ProductCard = ({ _id, title, description, price, images }) => {
   const url = `/product/` + _id;
 
   return (
-    <CardWrapper>
+    <div>
       <WhiteCard href={url}>
         <div>
           <img src={images[0]} alt="test" />
@@ -88,7 +86,7 @@ const ProductCard = ({ _id, title, description, price, images }) => {
           </ButtonElement>
         </PriceRow>
       </ProductInfo>
-    </CardWrapper>
+    </div>
   );
 };
 
