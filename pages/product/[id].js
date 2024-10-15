@@ -18,7 +18,8 @@ const ColWrapper = styled.div`
   margin-top: 20px;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 0.8fr 1.7fr;
+    gap: 40px;
   }
 `;
 
