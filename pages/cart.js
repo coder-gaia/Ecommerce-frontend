@@ -141,7 +141,7 @@ const CartPage = () => {
             <Box>
               <h1>Thank you for your order!</h1>
               <p>
-                We've just sent the order information to the provided email
+                We have just sent the order information to the provided email
                 address.
               </p>
             </Box>
