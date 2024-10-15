@@ -1,12 +1,12 @@
 import { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-const MainImage = styled.image`
+const MainImage = styled.img`
   max-width: 100%;
   max-height: 200px;
 `;
 
-const Image = styled.image`
+const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
 `;
@@ -40,7 +40,7 @@ const ProductImages = ({ images }) => {
 
   return (
     <ImageWrapper>
-      <MainImage src={activeImage} alt="test" />
+      <MainImage src={activeImage} />
       <ImageChanger>
         {images.map((img) => (
           <ImageButton
@@ -48,7 +48,7 @@ const ProductImages = ({ images }) => {
             onClick={() => setActiveImage(img)}
             active={img === activeImage}
           >
-            <Image src={img} alt="test" />
+            <Image src={img} />
           </ImageButton>
         ))}
       </ImageChanger>
