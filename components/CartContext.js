@@ -17,7 +17,7 @@ export function CarContextProvider({ children }) {
     if (ls && ls.getItem("cart")) {
       setCartProducts(JSON.parse(ls.getItem("cart")));
     }
-  }, [clearCart]);
+  }, []);
 
   const addProduct = (productId) => {
     setCartProducts((prev) => [...prev, productId]);

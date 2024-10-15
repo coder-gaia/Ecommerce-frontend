@@ -4,6 +4,7 @@ import Cart from "./icons/Cart";
 import Link from "next/link";
 import { CartContext } from "./CartContext";
 import { useContext } from "react";
+import Image from "next/image";
 
 const WhiteCard = styled(Link)`
   background-color: #fff;
