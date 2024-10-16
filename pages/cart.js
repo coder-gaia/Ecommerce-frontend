@@ -8,6 +8,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { signIn, useSession } from "next-auth/react";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -79,6 +80,7 @@ const CartPage = () => {
   const [country, setCountry] = useState("");
   const router = useRouter();
   const [orderSuccess, setOrderSuccess] = useState(false);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -151,6 +153,26 @@ const CartPage = () => {
     );
   }
 
+  // Verifica se o usuário está logado
+  if (!session) {
+    return (
+      <>
+        <Header />
+        <Center>
+          <ColumnsWrapper>
+            <Box>
+              <h2>You are not logged in</h2>
+              <ButtonElement primary={1} outline={1} onClick={() => signIn()}>
+                Sign In
+              </ButtonElement>
+            </Box>
+          </ColumnsWrapper>
+        </Center>
+      </>
+    );
+  }
+
+  // Se o usuário estiver logado, renderiza o carrinho e o checkout
   return (
     <div>
       <Header />

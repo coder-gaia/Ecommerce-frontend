@@ -4,7 +4,7 @@ import Cart from "./icons/Cart";
 import Link from "next/link";
 import { CartContext } from "./CartContext";
 import { useContext } from "react";
-import Image from "next/image";
+import { signIn, useSession } from "next-auth/react";
 
 const WhiteCard = styled(Link)`
   background-color: #fff;
@@ -62,6 +62,7 @@ const ProductTitle = styled(Link)`
 
 const ProductCard = ({ _id, title, description, price, images }) => {
   const { addProduct } = useContext(CartContext);
+  const { data: session } = useSession();
 
   const url = `/product/` + _id;
 
@@ -76,15 +77,26 @@ const ProductCard = ({ _id, title, description, price, images }) => {
         <ProductTitle href={url}>{title}</ProductTitle>
         <PriceRow>
           <Price>${price}</Price>
-          <ButtonElement
-            primary={1}
-            outline={1}
-            block
-            onClick={() => addProduct(_id)}
-          >
-            <Cart />
-            <b>Add to cart</b>
-          </ButtonElement>
+          {session ? (
+            <ButtonElement
+              primary={1}
+              outline={1}
+              block
+              onClick={() => addProduct(_id)}
+            >
+              <Cart />
+              <b>Add to cart</b>
+            </ButtonElement>
+          ) : (
+            <ButtonElement
+              primary={1}
+              outline={1}
+              block
+              onClick={() => signIn()}
+            >
+              <b>Sign In to add</b>
+            </ButtonElement>
+          )}
         </PriceRow>
       </ProductInfo>
     </div>

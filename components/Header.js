@@ -25,8 +25,7 @@ const Header = () => {
           <StyledNav mobileNavActive={mobileNavActive}>
             <NavLinks href={"/"}>Home</NavLinks>
             <NavLinks href={"/products"}>All Products</NavLinks>
-            {/* <NavLinks href={"/categories"}>Categories</NavLinks>
-            <NavLinks href={"/account"}>Account</NavLinks> */}
+            <NavLinks href={"/account"}>Account</NavLinks>
             <NavLinks href={"/cart"}>
               Cart ({cartProducts && cartProducts.length})
             </NavLinks>

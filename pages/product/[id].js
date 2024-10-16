@@ -10,6 +10,8 @@ import ButtonElement from "@/components/Button";
 import Cart from "@/components/icons/Cart";
 import { useContext } from "react";
 import { CartContext } from "@/components/CartContext";
+import { signIn, useSession } from "next-auth/react";
+import { AccountBox } from "../account";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -35,6 +37,7 @@ const Price = styled.span`
 
 const ProductPage = ({ product }) => {
   const { addProduct } = useContext(CartContext);
+  const { data: session, status } = useSession();
 
   const addProductToCart = () => {
     addProduct(product._id);
@@ -42,27 +45,47 @@ const ProductPage = ({ product }) => {
 
   return (
     <>
-      <Header />
-      <Center>
-        <ColWrapper>
-          <Box>
-            <ProductImages images={product.images} />
-          </Box>
-          <div>
-            <PageTitle>{product?.title}</PageTitle>
-            <p>{product.description}</p>
-            <PriceWrapper>
-              <Price>${product.price}</Price>
+      {!session ? (
+        <>
+          <Header />
+          <Center>
+            <AccountBox>
+              <h2>You are not logged in</h2>
+              <ButtonElement primary={1} outline={1} onClick={() => signIn()}>
+                Sign In
+              </ButtonElement>
+            </AccountBox>
+          </Center>
+        </>
+      ) : (
+        <>
+          <Header />
+          <Center>
+            <ColWrapper>
+              <Box>
+                <ProductImages images={product.images} />
+              </Box>
               <div>
-                <ButtonElement white={1} primary={1} onClick={addProductToCart}>
-                  <Cart />
-                  Add to cart
-                </ButtonElement>
+                <PageTitle>{product?.title}</PageTitle>
+                <p>{product.description}</p>
+                <PriceWrapper>
+                  <Price>${product.price}</Price>
+                  <div>
+                    <ButtonElement
+                      white={1}
+                      primary={1}
+                      onClick={addProductToCart}
+                    >
+                      <Cart />
+                      Add to cart
+                    </ButtonElement>
+                  </div>
+                </PriceWrapper>
               </div>
-            </PriceWrapper>
-          </div>
-        </ColWrapper>
-      </Center>
+            </ColWrapper>
+          </Center>
+        </>
+      )}
     </>
   );
 };

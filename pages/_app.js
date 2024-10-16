@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import Head from "next/head";
 import { CarContextProvider } from "@/components/CartContext";
+import { SessionProvider } from "next-auth/react";
 
 export const GlobalStyles = createGlobalStyle`
   body {
@@ -11,7 +12,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
     <>
       <Head>
@@ -21,9 +25,11 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
       <GlobalStyles />
-      <CarContextProvider>
-        <Component {...pageProps} />
-      </CarContextProvider>
+      <SessionProvider session={session}>
+        <CarContextProvider>
+          <Component {...pageProps} />
+        </CarContextProvider>
+      </SessionProvider>
     </>
   );
 }

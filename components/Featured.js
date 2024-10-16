@@ -12,9 +12,11 @@ import ButtonElement from "./Button";
 import Cart from "./icons/Cart";
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
+import { signIn, useSession } from "next-auth/react";
 
 const Featured = ({ featuredProduct }) => {
   const { addProduct } = useContext(CartContext);
+  const { data: session } = useSession();
 
   const addProductToCart = () => {
     addProduct(featuredProduct._id);
@@ -36,10 +38,16 @@ const Featured = ({ featuredProduct }) => {
                 >
                   Read More
                 </ButtonLink>
-                <ButtonElement white={1} onClick={addProductToCart}>
-                  <Cart />
-                  Add to Cart
-                </ButtonElement>
+                {!session ? (
+                  <ButtonElement white={1} onClick={signIn}>
+                    Sign in to add
+                  </ButtonElement>
+                ) : (
+                  <ButtonElement white={1} onClick={addProductToCart}>
+                    <Cart />
+                    Add to Cart
+                  </ButtonElement>
+                )}
               </ButtonsWrapper>
             </div>
           </Columns>
