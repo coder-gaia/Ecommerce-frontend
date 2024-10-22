@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const StyledHeader = styled.header`
-  background-color: #222;
+  background-color: #491454;
 `;
 
 export const Logo = styled(Link)`
@@ -47,7 +47,7 @@ export const StyledNav = styled.nav`
   left: 0;
   right: 0;
   padding: 70px 20px 20px;
-  background-color: #222;
+  background-color: transparent;
   @media screen and (min-width: 768px) {
     display: flex;
     position: static;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ButtonElement from "./Button";
 
 export const Background = styled.div`
-  background-color: #222;
+  background-color: #491454;
   color: #fff;
   padding: 50px 0;
 `;

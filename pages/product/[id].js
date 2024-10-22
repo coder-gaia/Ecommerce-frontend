@@ -45,47 +45,47 @@ const ProductPage = ({ product }) => {
 
   return (
     <>
-      {!session ? (
-        <>
-          <Header />
-          <Center>
-            <AccountBox>
-              <h2>You are not logged in</h2>
-              <ButtonElement primary={1} outline={1} onClick={() => signIn()}>
-                Sign In
-              </ButtonElement>
-            </AccountBox>
-          </Center>
-        </>
-      ) : (
-        <>
-          <Header />
-          <Center>
-            <ColWrapper>
-              <Box>
-                <ProductImages images={product.images} />
-              </Box>
-              <div>
-                <PageTitle>{product?.title}</PageTitle>
-                <p>{product.description}</p>
-                <PriceWrapper>
-                  <Price>${product.price}</Price>
-                  <div>
-                    <ButtonElement
-                      white={1}
-                      primary={1}
-                      onClick={addProductToCart}
-                    >
-                      <Cart />
-                      Add to cart
-                    </ButtonElement>
-                  </div>
-                </PriceWrapper>
-              </div>
-            </ColWrapper>
-          </Center>
-        </>
-      )}
+      <>
+        <Header />
+        <Center>
+          <ColWrapper>
+            <Box>
+              <ProductImages images={product.images} />
+            </Box>
+            <div>
+              <PageTitle>{product?.title}</PageTitle>
+              <p>{product.description}</p>
+              <PriceWrapper>
+                <Price>${product.price}</Price>
+                <div>
+                  {!session ? (
+                    <>
+                      <ButtonElement
+                        white={1}
+                        primary={1}
+                        onClick={() => signIn()}
+                      >
+                        Sign in to add
+                      </ButtonElement>
+                    </>
+                  ) : (
+                    <>
+                      <ButtonElement
+                        white={1}
+                        primary={1}
+                        onClick={addProductToCart}
+                      >
+                        <Cart />
+                        Add to cart
+                      </ButtonElement>
+                    </>
+                  )}
+                </div>
+              </PriceWrapper>
+            </div>
+          </ColWrapper>
+        </Center>
+      </>
     </>
   );
 };
