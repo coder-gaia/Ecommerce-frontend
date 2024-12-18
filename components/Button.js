@@ -2,7 +2,7 @@ import { primary } from "@/lib/Colors";
 import styled, { css } from "styled-components";
 
 export const ButtonStyles = css`
-  font-family: "Lato";
+  font-family: "Lato", sans-serif;
   border: 0;
   padding: 5px 15px;
   border-radius: 5px;
