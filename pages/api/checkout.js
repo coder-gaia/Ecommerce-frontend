@@ -58,8 +58,8 @@ const handler = async (req, res) => {
     line_items,
     mode: "payment",
     customer_email: email,
-    success_url: process.env.PUBLIC_URL + "/cart?success=1",
-    cancel_url: process.env.PUBLIC_URL + "/cart?cancelled=1",
+    success_url: process.env.NEXTAUTH_URL + "/cart?success=1",
+    cancel_url: process.env.NEXTAUTH_URL + "/cart?cancelled=1",
     metadata: { orderId: orderDoc._id.toString(), test: "ok" },
   });
 
